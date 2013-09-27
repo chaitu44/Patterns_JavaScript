@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Salary Calculator</title>
+</head>
+<body>
+	<label>Basic Salary : </label><input type="text" id="basSalary"><br>
+	<label>Hra : </label><input type="text" id="hra"><br>
+	<label>Da : </label><input type="text" id="da"><br>
+	<label>Tax : </label><input type="text" id="tax"><br>
+	<input type="button" value="Calculate" id="result"><br>
+	<div id="resultBox"></div>
+
+<script>
+	function CalculateSalary(){
+	var _basic = document.getElementById('basSalary').value
+		, _hra = document.getElementById('hra').value
+		, _da = document.getElementById('da').value
+		, _tax= document.getElementById('tax').value;
+	function getNet(){
+		return (parseInt(_basic) + parseInt(_hra) + parseInt(_da));
+	}
+	return {
+		basic : function(){
+			if(arguments.length ==0) return _basic;
+			_basic = arguments[0];
+		},
+		hra : function(){
+			if(arguments.length ==0) return _hra;
+			_hra = arguments[0];
+		},
+		da : function(){
+			if(arguments.length ==0) return _da;
+			_da = arguments[0];
+		},
+		tax : function(){
+			if(arguments.length ==0) return _tax;
+			_tax = arguments[0];
+		},
+		calculate : function(){
+			return getNet()*((100-_tax)/100);
+		}
+	}
+}
+
+document.getElementById('result').onclick=function(){
+	document.getElementById('resultBox').innerHTML = CalculateSalary().calculate();
+};
+</script>
+	
+</body>
+</html>
